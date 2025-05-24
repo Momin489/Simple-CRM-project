@@ -1,0 +1,27 @@
+<h2 class="mb-4">Products</h2>
+
+<div class="mb-3 d-flex justify-content-between align-items-center">
+  <a href="/dashboard" class="btn btn-secondary">← Back</a>
+  <a href="/products/add" class="btn btn-primary">Add Product</a>
+</div>
+
+<% if (products.length > 0) { %>
+  <ul class="list-group shadow-sm rounded">
+    <% products.forEach(product => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+        <div style="max-width: 65%;">
+          <strong class="fs-5"><%= product.name %></strong> 
+          <span class="text-primary fw-semibold ms-2">₹<%= product.price.toFixed(2) %></span>
+          <br />
+          <small class="text-muted fst-italic"><%= product.description || 'No description' %></small>
+        </div>
+        <div class="btn-group btn-group-sm" role="group" aria-label="Actions">
+          <a href="/products/edit/<%= product._id %>" class="btn btn-warning me-2 px-3">Edit</a>
+          <a href="/products/delete/<%= product._id %>" class="btn btn-danger px-3" onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <div class="alert alert-info text-center fs-5">No products found.</div>
+<% } %>
